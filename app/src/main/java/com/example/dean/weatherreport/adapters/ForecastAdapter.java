@@ -18,12 +18,15 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
     private final String BASE_ICON_URL = "http://openweathermap.org/img/w/";
 
+    private final ListItemClickListener mOnClickListener;
     private WeatherData mWeatherData;
     private Context mContext;
 
-    public ForecastAdapter(Context context, WeatherData weatherData) {
+    public ForecastAdapter(Context context, WeatherData weatherData,
+                           ListItemClickListener clickListener) {
         mWeatherData = weatherData;
         mContext = context;
+        mOnClickListener = clickListener;
     }
 
     @Override
@@ -60,7 +63,8 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         return numberOfItems;
     }
 
-    class ForecastViewHolder extends RecyclerView.ViewHolder {
+    class ForecastViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
         ImageView weatherIconImageView;
         TextView dateTextView;
         TextView descriptionTextView;
@@ -75,6 +79,18 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
             descriptionTextView = (TextView) itemView.findViewById(R.id.tv_weather_description);
             highTempTextView = (TextView) itemView.findViewById(R.id.tv_high_temp);
             lowTempTextView = (TextView) itemView.findViewById(R.id.tv_low_temp);
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            int clickedPosition = getAdapterPosition();
+            mOnClickListener.onListItemClick(clickedPosition);
+        }
+    }
+
+    public interface ListItemClickListener {
+        void onListItemClick(int clickedItemIndex);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.dean.weatherreport.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +18,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements ForecastAdapter.ListItemClickListener {
 
     private static final String API_KEY = "00ece9005440c91a0a4df58ea28f8349";
 
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
                 WeatherData weatherData = response.body();
-                mForecastAdapter = new ForecastAdapter(MainActivity.this, weatherData);
+                mForecastAdapter = new ForecastAdapter(MainActivity.this,
+                        weatherData, MainActivity.this);
                 mForecastRecycler.setAdapter(mForecastAdapter);
             }
 
@@ -56,5 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
     }
 }
