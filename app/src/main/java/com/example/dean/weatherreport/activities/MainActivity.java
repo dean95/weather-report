@@ -2,10 +2,12 @@ package com.example.dean.weatherreport.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.example.dean.weatherreport.R;
+import com.example.dean.weatherreport.adapters.ForecastAdapter;
 import com.example.dean.weatherreport.api.OpenWeatherMapClient;
 import com.example.dean.weatherreport.model.WeatherData;
 
@@ -19,14 +21,19 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String API_KEY = "00ece9005440c91a0a4df58ea28f8349";
 
-    public TextView tvTest;
+    private RecyclerView mForecastRecycler;
+    private ForecastAdapter mForecastAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvTest = (TextView) findViewById(R.id.tv_json_reponse_test);
+        mForecastRecycler = (RecyclerView) findViewById(R.id.rv_forecast);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mForecastRecycler.setLayoutManager(layoutManager);
+        mForecastRecycler.setHasFixedSize(true);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.openweathermap.org/")
@@ -34,18 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         OpenWeatherMapClient client = retrofit.create(OpenWeatherMapClient.class);
-        Call<WeatherData> call = client.getWeatherData("zagreb", "metric", "1", API_KEY);
+        Call<WeatherData> call = client.getWeatherData("zagreb", "metric", "7", API_KEY);
 
         call.enqueue(new Callback<WeatherData>() {
             @Override
             public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
                 WeatherData weatherData = response.body();
-                tvTest.setText(weatherData.getCod());
-
-                for (com.example.dean.weatherreport.model.List list : weatherData.getList()) {
-                    tvTest.append("\n" + list.getSpeed());
-                    tvTest.append("\n" + list.getTemp().getMax());
-                }
+                mForecastAdapter = new ForecastAdapter(MainActivity.this, weatherData);
+                mForecastRecycler.setAdapter(mForecastAdapter);
             }
 
             @Override
