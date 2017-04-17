@@ -8,9 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.example.dean.weatherreport.R;
+import com.example.dean.weatherreport.adapters.AutoValueGsonTypeAdapterFactory;
 import com.example.dean.weatherreport.adapters.ForecastAdapter;
 import com.example.dean.weatherreport.api.OpenWeatherMapClient;
 import com.example.dean.weatherreport.model.WeatherData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,9 +40,15 @@ public class MainActivity extends AppCompatActivity
         mForecastRecycler.setLayoutManager(layoutManager);
         mForecastRecycler.setHasFixedSize(true);
 
+        GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(
+                new GsonBuilder()
+                .registerTypeAdapterFactory(AutoValueGsonTypeAdapterFactory.create())
+                .create()
+        );
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.openweathermap.org/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(gsonConverterFactory)
                 .build();
 
         OpenWeatherMapClient client = retrofit.create(OpenWeatherMapClient.class);

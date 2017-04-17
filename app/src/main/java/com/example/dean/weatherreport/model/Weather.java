@@ -1,54 +1,21 @@
 
 package com.example.dean.weatherreport.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.support.annotation.NonNull;
 
-public class Weather {
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("main")
-    @Expose
-    private String main;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    @SerializedName("icon")
-    @Expose
-    private String icon;
+@AutoValue
+public abstract class Weather {
 
-    public Integer getId() {
-        return id;
+    public abstract @NonNull Integer id();
+    public abstract @NonNull String main();
+    public abstract @NonNull String description();
+    public abstract @NonNull String icon();
+
+    public static TypeAdapter<Weather> typeAdapter(@NonNull Gson gson) {
+        return new AutoValue_Weather.GsonTypeAdapter(gson);
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getMain() {
-        return main;
-    }
-
-    public void setMain(String main) {
-        this.main = main;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
 }

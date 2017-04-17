@@ -39,26 +39,26 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
     @Override
     public void onBindViewHolder(ForecastViewHolder holder, int position) {
-        String iconId = mWeatherData.getList().get(position).getWeather().get(0).getIcon();
+        String iconId = mWeatherData.list().get(position).weather().get(0).icon();
         Log.i("ForecastAdapter", iconId);
         Picasso.with(mContext)
                 .load(BASE_ICON_URL + iconId + ".png")
                 .into(holder.weatherIconImageView);
 
-        Long unixTimestampDate = mWeatherData.getList().get(position).getDt();
+        Long unixTimestampDate = mWeatherData.list().get(position).dt();
         holder.dateTextView
                 .setText(DateUtils.formatDate(unixTimestampDate).toString());
-        holder.descriptionTextView.setText(mWeatherData.getList().get(position)
-                .getWeather().get(0).getDescription());
+        holder.descriptionTextView.setText(mWeatherData.list().get(position)
+                .weather().get(0).description());
         holder.highTempTextView
-                .setText(String.valueOf(mWeatherData.getList().get(position).getTemp().getMax()));
+                .setText(String.valueOf(mWeatherData.list().get(position).temp().max()));
         holder.lowTempTextView
-                .setText(String.valueOf(mWeatherData.getList().get(position).getTemp().getMin()));
+                .setText(String.valueOf(mWeatherData.list().get(position).temp().min()));
     }
 
     @Override
     public int getItemCount() {
-        int numberOfItems = mWeatherData.getList().size();
+        int numberOfItems = mWeatherData.list().size();
 
         return numberOfItems;
     }

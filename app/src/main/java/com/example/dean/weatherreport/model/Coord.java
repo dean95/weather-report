@@ -1,32 +1,19 @@
 
 package com.example.dean.weatherreport.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.support.annotation.NonNull;
 
-public class Coord {
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
-    @SerializedName("lon")
-    @Expose
-    private Double lon;
-    @SerializedName("lat")
-    @Expose
-    private Double lat;
+@AutoValue
+public abstract class Coord {
 
-    public Double getLon() {
-        return lon;
+    public abstract @NonNull Double lon();
+    public abstract @NonNull Double lat();
+
+    public static TypeAdapter<Coord> typeAdapter(@NonNull Gson gson) {
+        return new AutoValue_Coord.GsonTypeAdapter(gson);
     }
-
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
-
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
 }

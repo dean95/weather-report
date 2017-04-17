@@ -1,65 +1,22 @@
 
 package com.example.dean.weatherreport.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.support.annotation.NonNull;
 
-public class City {
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("coord")
-    @Expose
-    private Coord coord;
-    @SerializedName("country")
-    @Expose
-    private String country;
-    @SerializedName("population")
-    @Expose
-    private Integer population;
+@AutoValue
+public abstract class City {
 
-    public Integer getId() {
-        return id;
+    public abstract @NonNull Integer id();
+    public abstract @NonNull String name();
+    public abstract @NonNull Coord coord();
+    public abstract @NonNull String country();
+    public abstract @NonNull Integer population();
+
+    public static TypeAdapter<City> typeAdapter(@NonNull Gson gson) {
+        return new AutoValue_City.GsonTypeAdapter(gson);
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Coord getCoord() {
-        return coord;
-    }
-
-    public void setCoord(Coord coord) {
-        this.coord = coord;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Integer getPopulation() {
-        return population;
-    }
-
-    public void setPopulation(Integer population) {
-        this.population = population;
-    }
-
 }

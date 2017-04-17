@@ -1,109 +1,27 @@
 
 package com.example.dean.weatherreport.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-public class List {
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
-    @SerializedName("dt")
-    @Expose
-    private Long dt;
-    @SerializedName("temp")
-    @Expose
-    private Temp temp;
-    @SerializedName("pressure")
-    @Expose
-    private Double pressure;
-    @SerializedName("humidity")
-    @Expose
-    private Integer humidity;
-    @SerializedName("weather")
-    @Expose
-    private java.util.List<Weather> weather = null;
-    @SerializedName("speed")
-    @Expose
-    private Double speed;
-    @SerializedName("deg")
-    @Expose
-    private Integer deg;
-    @SerializedName("clouds")
-    @Expose
-    private Integer clouds;
-    @SerializedName("rain")
-    @Expose
-    private Double rain;
+@AutoValue
+public abstract class List {
 
-    public Long getDt() {
-        return dt;
+    public abstract @NonNull Long dt();
+    public abstract @NonNull Temp temp();
+    public abstract @NonNull Double pressure();
+    public abstract @NonNull Integer humidity();
+    public abstract @NonNull java.util.List<Weather> weather();
+    public abstract @Nullable Double speed();
+    public abstract @Nullable Integer deg();
+    public abstract @Nullable Integer clouds();
+    public abstract @Nullable Double rain();
+
+    public static TypeAdapter<List> typeAdapter(@NonNull Gson gson) {
+        return new AutoValue_List.GsonTypeAdapter(gson);
     }
-
-    public void setDt(Long dt) {
-        this.dt = dt;
-    }
-
-    public Temp getTemp() {
-        return temp;
-    }
-
-    public void setTemp(Temp temp) {
-        this.temp = temp;
-    }
-
-    public Double getPressure() {
-        return pressure;
-    }
-
-    public void setPressure(Double pressure) {
-        this.pressure = pressure;
-    }
-
-    public Integer getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(Integer humidity) {
-        this.humidity = humidity;
-    }
-
-    public java.util.List<Weather> getWeather() {
-        return weather;
-    }
-
-    public void setWeather(java.util.List<Weather> weather) {
-        this.weather = weather;
-    }
-
-    public Double getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(Double speed) {
-        this.speed = speed;
-    }
-
-    public Integer getDeg() {
-        return deg;
-    }
-
-    public void setDeg(Integer deg) {
-        this.deg = deg;
-    }
-
-    public Integer getClouds() {
-        return clouds;
-    }
-
-    public void setClouds(Integer clouds) {
-        this.clouds = clouds;
-    }
-
-    public Double getRain() {
-        return rain;
-    }
-
-    public void setRain(Double rain) {
-        this.rain = rain;
-    }
-
 }
