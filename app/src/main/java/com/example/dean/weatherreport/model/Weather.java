@@ -1,6 +1,7 @@
 
 package com.example.dean.weatherreport.model;
 
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
@@ -8,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 
 @AutoValue
-public abstract class Weather {
+public abstract class Weather implements Parcelable {
 
     public abstract @NonNull Integer id();
     public abstract @NonNull String main();

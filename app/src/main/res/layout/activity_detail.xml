@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.dean.weatherreport.activities.DetailActivity">
 
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>

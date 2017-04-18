@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     private RecyclerView mForecastRecycler;
     private ForecastAdapter mForecastAdapter;
+    private WeatherData mWeatherData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,9 @@ public class MainActivity extends AppCompatActivity
         call.enqueue(new Callback<WeatherData>() {
             @Override
             public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                WeatherData weatherData = response.body();
+                mWeatherData = response.body();
                 mForecastAdapter = new ForecastAdapter(MainActivity.this,
-                        weatherData, MainActivity.this);
+                        mWeatherData, MainActivity.this);
                 mForecastRecycler.setAdapter(mForecastAdapter);
             }
 
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickedItemIndex) {
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.WEATHER_FOR_DAY_EXTRA,
+                mWeatherData.list().get(clickedItemIndex));
         startActivity(intent);
     }
 }
