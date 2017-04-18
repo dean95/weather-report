@@ -47,7 +47,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
         Long unixTimestampDate = mWeatherData.list().get(position).dt();
         holder.dateTextView
-                .setText(DateUtils.formatDate(unixTimestampDate).toString());
+                .setText(DateUtils.formatDate(unixTimestampDate));
         holder.descriptionTextView.setText(mWeatherData.list().get(position)
                 .weather().get(0).description());
         holder.highTempTextView
