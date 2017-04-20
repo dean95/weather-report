@@ -1,8 +1,11 @@
 package com.example.dean.weatherreport.activities;
 
 import android.content.Intent;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.dean.weatherreport.R;
@@ -30,5 +33,25 @@ public class DetailActivity extends AppCompatActivity {
                 textView.setText(weatherForDay.weather().get(0).description());
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail, menu);
+        MenuItem item = menu.findItem(R.id.action_share);
+        item.setIntent(createShareForecastIntent());
+
+        return true;
+    }
+
+    private Intent createShareForecastIntent() {
+        String textForSharing = weatherForDay.weather().get(0).description();
+
+        Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setText(textForSharing)
+                .getIntent();
+
+        return shareIntent;
     }
 }
