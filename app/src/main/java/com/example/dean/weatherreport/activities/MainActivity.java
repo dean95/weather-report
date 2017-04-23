@@ -98,6 +98,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_map:
                 openLocationInMap();
                 return true;
+            case R.id.action_settings:
+                Intent settingsActivity = new Intent(this, SettingsActivity.class);
+                startActivity(settingsActivity);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
