@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="@string/pref_location_default_value"
+        android:key="@string/pref_location_key"
+        android:title="@string/pref_location_label"/>
+
+    <EditTextPreference
+        android:defaultValue="@string/pref_number_of_days_default_value"
+        android:key="@string/pref_number_of_days_key"
+        android:title="@string/pref_number_of_days_label"/>
+
+    <ListPreference
+        android:defaultValue="@string/pref_units_metric_value"
+        android:entries="@array/pref_units_option_labels"
+        android:entryValues="@array/pref_units_option_values"
+        android:key="@string/pref_units_key"
+        android:title="@string/pref_units_label" />
+</PreferenceScreen>
