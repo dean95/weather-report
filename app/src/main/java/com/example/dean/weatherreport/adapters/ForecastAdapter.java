@@ -40,7 +40,6 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     @Override
     public void onBindViewHolder(ForecastViewHolder holder, int position) {
         String iconId = mWeatherData.list().get(position).weather().get(0).icon();
-        Log.i("ForecastAdapter", iconId);
         Picasso.with(mContext)
                 .load(BASE_ICON_URL + iconId + ".png")
                 .into(holder.weatherIconImageView);

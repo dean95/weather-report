@@ -16,6 +16,7 @@ import com.example.dean.weatherreport.R;
 import com.example.dean.weatherreport.adapters.AutoValueGsonTypeAdapterFactory;
 import com.example.dean.weatherreport.adapters.ForecastAdapter;
 import com.example.dean.weatherreport.api.OpenWeatherMapClient;
+import com.example.dean.weatherreport.data.WeatherTable;
 import com.example.dean.weatherreport.model.WeatherData;
 import com.example.dean.weatherreport.preferences.ForecastPreferences;
 import com.google.gson.GsonBuilder;
