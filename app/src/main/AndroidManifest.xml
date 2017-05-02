@@ -29,6 +29,11 @@
                 android:value=".activities.MainActivity"/>
         </activity>
         <activity android:name=".activities.SettingsActivity"></activity>
+
+        <provider
+            android:authorities="com.example.dean.weatherreport.data"
+            android:exported="false"
+            android:name=".data.WeatherDatabase_Provider" />
     </application>
 
 </manifest>
